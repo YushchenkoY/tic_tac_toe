@@ -1,12 +1,12 @@
-import './App.css';
 import React from 'react';
-import Playing_field from './components/pages/Playing_field';
+import logo from './img/logo.png'
+import Board from './components/Board';
 
 function App() {
   return (
     <div className="App">
-      <Playing_field />
-
+      <img src={logo} className="App-logo" alt="logo" />
+      <Board />
     </div>
   );
 }
