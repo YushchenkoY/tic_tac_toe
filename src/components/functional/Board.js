@@ -1,49 +1,56 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './Board.css'
+import calculateWinner from './How_is_winner';
 
-class Board extends React.Component{
-    constructor() {
-        super()
-        this.state = {
-            game: [
-                null, null, null,
-                null, null, null,
-                null, null, null,
-            ],
-            isX: true
-        }
+const initialStateBoard = Array(9).fill(null)
+const initialStateIsX = true
+
+
+function Board() {
+    const [board, setBoard] = useState(initialStateBoard)
+    const [isX, setIsX] = useState(initialStateIsX);
+    const winner = calculateWinner(board);
+
+    const upDateGame = (i, char) => {
+        const newBoard = [...board]
+        if (winner || newBoard[i]) return null
+        newBoard[i] = isX ? 'X' : 'O'
+        setBoard(newBoard)
+        setIsX(!isX)
     }
 
-    upDate = (i, char) => {
-        let newGameState = [...this.state.game]
-        newGameState[i] = char
-        this.setState( {game: newGameState,
-                        isX: !this.state.isX}
-        )
-    }
 
-    render (){
-
+    const startNewGame = () => {
         return (
-            <div className = 'table'>
-                <biv className = 'line'>
-                    <div className = 'cell' onClick={() => this.upDate(0, this.state.isX !== true ? 'X' : 'O')} >{this.state.game[0]}</div>
-                    <div className = 'cell' onClick={() => this.upDate(1, this.state.isX !== true ? 'X' : 'O')} >{this.state.game[1]}</div>
-                    <div className = 'cell' onClick={() => this.upDate(2, this.state.isX !== true ? 'X' : 'O')} >{this.state.game[2]}</div>
-                </biv>
-                <biv className = 'line'>
-                    <div className = 'cell' onClick={() => this.upDate(3, this.state.isX !== true ? 'X' : 'O')} >{this.state.game[3]}</div>
-                    <div className = 'cell' onClick={() => this.upDate(4, this.state.isX !== true ? 'X' : 'O')} >{this.state.game[4]}</div>
-                    <div className = 'cell' onClick={() => this.upDate(5, this.state.isX !== true ? 'X' : 'O')} >{this.state.game[5]}</div>
-                </biv>
-                <biv className = 'line'>
-                    <div className = 'cell' onClick={() => this.upDate(6, this.state.isX !== true ? 'X' : 'O')} >{this.state.game[6]}</div>
-                    <div className = 'cell' onClick={() => this.upDate(7, this.state.isX !== true ? 'X' : 'O')} >{this.state.game[7]}</div>
-                    <div className = 'cell' onClick={() => this.upDate(8, this.state.isX !== true ? 'X' : 'O')} >{this.state.game[8]}</div>
-                </biv>
-            </div>
+            <button className = 'start__btn' onClick = { () => {setBoard(initialStateBoard)}}> START NEW GAME </button>
         )
     }
+
+
+
+    return (
+    <> 
+        {startNewGame()}
+        <div className = 'table'>
+            <biv className = 'line'>
+                <div className = 'cell' onClick = { () => upDateGame(0) } >{board[0]}</div>
+                <div className = 'cell' onClick = { () => upDateGame(1) } >{board[1]}</div>
+                <div className = 'cell' onClick = { () => upDateGame(2) } >{board[2]}</div>
+            </biv>
+            <biv className = 'line'>
+                <div className = 'cell' onClick = { () => upDateGame(3) } >{board[3]}</div>
+                <div className = 'cell' onClick = { () => upDateGame(4) } >{board[4]}</div>
+                <div className = 'cell' onClick = { () => upDateGame(5) } >{board[5]}</div>
+            </biv>
+            <biv className = 'line'>
+                <div className = 'cell' onClick = { () => upDateGame(6) } >{board[6]}</div>
+                <div className = 'cell' onClick = { () => upDateGame(7) } >{board[7]}</div>
+                <div className = 'cell' onClick = { () => upDateGame(8) } >{board[8]}</div>
+            </biv>
+            <div>Winner is {winner}</div>
+        </div>
+    </ >
+)
 }
 
 export default Board
