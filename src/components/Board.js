@@ -4,14 +4,21 @@ import Status from './Status';
 
 const initialStateBoard = Array(9).fill(null)
 const initialStateIsX = true
-let counterX = 0
-let counterO = 0
+const initialStateX = 0
+const initialStateO = 0
 
 function Board() {
     const [board, setBoard] = useState(initialStateBoard)
     const [isX, setIsX] = useState(initialStateIsX);
     const winner = CalculateWinner(board);
-    const gameStatus = Status(board)
+    const [counterX, setCounterX] = useState(initialStateX);
+    const [counterO, setCounterO] = useState(initialStateO)
+
+    const gameFinish = Status(board);
+    console.log("status -" + gameStatus)
+
+
+
 
     const upDateGame = (i, char) => {
         const newBoard = [...board]
@@ -21,16 +28,17 @@ function Board() {
         setIsX(!isX)
     }
 
-    // НЕ МОГУ НАСТРОИТЬ ВЫВОД РЕЗУЛЬТАТА "НИЧЬЯ"
     const status = () => {
-        if (winner) {
+        if (winner) { 
             return (<span>Winner is {winner}</span> )
-        } else if (gameStatus === true && winner === null) {
+        } else if (gameFinish === true && winner === null) {
             return (<span>DRAW</span>)
         } else {
             return (<span> Next  { isX ? 'X' : 'O' }</span>)
         }
     }
+
+
 
     // СЧИТАЕТ ТОЛЬКО ДО РЕЗУЛЬТАТА 1:1
     const score = () => {
@@ -43,14 +51,27 @@ function Board() {
             <span>{counterX} : {counterO}</span>
         )
 
-    }
+    }    
+    // const score = () => { 
+    //     if (winner) { 
+    //         if (winner == 'X') { 
+    //             let newX = counterX + 1
+    //             return setCounterX(newX)
+    //         } else if (winner == 'O'){ 
+    //             let newO = counterO + 1
+    //             return setCounterO(newO)
+    //         } 
+    //     return (
+    //         <span>{counterX} : {counterO}</span>
+    //     )}
+    // }
 
     const reset = () => {
         return (
                 setBoard(initialStateBoard),
                 setIsX(initialStateIsX),
-                counterX = 0,
-                counterO = 0
+                setCounterX(initialStateX),
+                setCounterO(initialStateO)
         )
     }
 
@@ -89,9 +110,7 @@ function Board() {
         {score()}
         <button className = 'btn' onClick = { () => {setBoard(initialStateBoard)}}> START NEW GAME </button>
         <button className = 'btn' onClick = { () => reset() }> RESET </button>
-
-    </ div >
-)
+    </ div > )
 }
 
 export default Board
