@@ -41,8 +41,30 @@
   align-items: center;
 }
 .line{
+  width: 225px;
   display: flex;
   flex-wrap: wrap;
+}
+.history {
+  margin-top: 30px;
+  display: flex;
+}
+
+.historyItem {
+  margin-right: 5px;
+  width: 30px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.historyCell {
+  width: 10px;
+  height: 10px;
+  font-size: 8px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgb(0, 0, 0);
 }
 .cell{
   background-color: rgb(254, 227, 0);

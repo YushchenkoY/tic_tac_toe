@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from './img/logo.png'
-import Board from './components/Board';
+import Board from './components/Board/Board';
 
 function App() {
   return (
