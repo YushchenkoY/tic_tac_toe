@@ -1,4 +1,6 @@
-export function calculateWinner(incomeBoard) {
+import { BoardItem } from './types';
+
+export function calculateWinner(incomeBoard: BoardItem[]): string | null {
   const winLines = [
     [0, 1, 2],
     [3, 4, 5],

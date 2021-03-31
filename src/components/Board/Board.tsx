@@ -1,10 +1,9 @@
-import React, {useState, useEffect, useCallback, useMemo} from 'react';
-import {calculateWinner} from './helpers';
+import React from 'react';
 import useBoard from './useBoard';
 
 function Board() {
-  
-  
+
+
   const {
     board,
     history,
@@ -16,7 +15,7 @@ function Board() {
     PLAYER_2,
     score,
   } = useBoard();
-  
+
   return (
     <div className='vertically'>
       {status}
@@ -24,7 +23,7 @@ function Board() {
         <div>
           <span className='first player'>Player X</span>
         </div>
-        
+
         <div className='table'>
           <div className='line'>
             {board.map((el, idx) => (
@@ -39,7 +38,7 @@ function Board() {
       <span>{score[PLAYER_1]} : {score[PLAYER_2]}</span>
       <button className='btn' onClick={onClickNewGame}>START NEW GAME</button>
       <button className='btn' onClick={onClickReset}>RESET</button>
-        
+
         <div className='history'>
             {history.map(historyItem => (
               <div className='historyItem'>
